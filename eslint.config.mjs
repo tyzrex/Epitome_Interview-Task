@@ -13,9 +13,24 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends('next/core-web-vitals', 'next/typescript', 'prettier'),
   {
+    ignores: [
+      'node_modules',
+      'dist',
+      'build',
+      'coverage',
+      '.next',
+      '.turbo',
+      'public',
+      'out',
+      'scripts',
+      '**/generated/*',
+    ],
+  },
+  {
     plugins: {
       'check-file': CheckFilePlugin,
     },
+
     rules: {
       'check-file/filename-naming-convention': [
         'error',

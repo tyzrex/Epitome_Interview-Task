@@ -4,13 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npx prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
     "prepare": "husky",
-    "seed": "tsx prisma/seed.ts",
-    "postinstall": "prisma generate --no-engine"
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^9.8.0",

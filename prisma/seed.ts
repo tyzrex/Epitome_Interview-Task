@@ -29,7 +29,7 @@ async function main() {
   }
   console.log('Seeding database...');
 
-  const students = Array.from({ length: 500 }).map(() => ({
+  const students = Array.from({ length: 10000 }).map(() => ({
     name: faker.person.fullName(),
     program: faker.helpers.arrayElement(programs),
     status: faker.helpers.arrayElement(statuses),

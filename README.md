@@ -15,7 +15,7 @@ This project demonstrates **enterprise-level frontend architecture** and **multi
 ✅ **Modular Architecture** - Feature-based module organization  
 ✅ **Multiple Data Fetching Patterns** - Client-side, Server-side, and Hybrid approaches  
 ✅ **Advanced Virtualization** - React Virtuoso for handling 100k+ records  
-✅ **Performance Optimization** - Caching, memoization, and bundle optimization  
+✅ **Performance Optimization** - Caching, memoization, and bundle optimization
 
 ## 🏗️ Architecture Deep Dive
 
@@ -25,25 +25,25 @@ The project follows a **domain-driven design** approach with self-contained modu
 
 src/
 ├── modules/
-│   └── students/                    # Student Management Module
-│       ├── components/              # Feature-specific components
-│       │   ├── student-table.tsx
-│       │   ├── student-card.tsx
-│       │   └── student-filters.tsx
-│       ├── hooks/                   # Custom hooks for student logic
-│       │   ├── use-students.ts      # Data fetching hook
-│       │   └── use-update-students.ts # Mutation hook
-│       ├── services/                # API layer abstraction
-│       │   └── student-api.ts
-│       ├── constants.ts             # Module constants
-│       ├── types.ts                 # TypeScript definitions
-│       └── index.ts                 # Public API exports
-├── components/                      # Shared UI components
-├── hooks/                          # Global custom hooks
-├── lib/                            # Utilities and configurations
-├── providers/                      # React context providers
-├── services/                       # Global services
-└── app/                           # Next.js App Router pages
+│ └── students/ # Student Management Module
+│ ├── components/ # Feature-specific components
+│ │ ├── student-table.tsx
+│ │ ├── student-card.tsx
+│ │ └── student-filters.tsx
+│ ├── hooks/ # Custom hooks for student logic
+│ │ ├── use-students.ts # Data fetching hook
+│ │ └── use-update-students.ts # Mutation hook
+│ ├── services/ # API layer abstraction
+│ │ └── student-api.ts
+│ ├── constants.ts # Module constants
+│ ├── types.ts # TypeScript definitions
+│ └── index.ts # Public API exports
+├── components/ # Shared UI components
+├── hooks/ # Global custom hooks
+├── lib/ # Utilities and configurations
+├── providers/ # React context providers
+├── services/ # Global services
+└── app/ # Next.js App Router pages
 
 ### Benefits of This Architecture
 
@@ -51,7 +51,7 @@ src/
 🔹 **Maintainability** - Clear boundaries and single responsibility  
 🔹 **Reusability** - Modules can be extracted and reused across projects  
 🔹 **Team Collaboration** - Multiple developers can work on different modules  
-🔹 **Testing** - Isolated testing of individual modules  
+🔹 **Testing** - Isolated testing of individual modules
 
 ## 📊 Data Fetching Strategy Comparison
 
@@ -64,12 +64,12 @@ This project demonstrates **three distinct data fetching approaches** to showcas
 \`\`\`typescript
 // modules/students/hooks/use-students.ts
 export function useStudents({ page, limit, filters }: UseStudentsParams) {
-  return useQuery({
-    queryKey: ["students", page, limit, filters],
-    queryFn: () => studentApi.getAll({ page, limit, ...filters }),
-    staleTime: 60 * 1000,
-    gcTime: 10 * 60 * 1000,
-  })
+return useQuery({
+queryKey: ["students", page, limit, filters],
+queryFn: () => studentApi.getAll({ page, limit, ...filters }),
+staleTime: 60 _ 1000,
+gcTime: 10 _ 60 \* 1000,
+})
 }
 \`\`\`
 
@@ -87,9 +87,9 @@ export function useStudents({ page, limit, filters }: UseStudentsParams) {
 \`\`\`typescript
 // app/dashboard/server/page.tsx
 export default async function ServerPage({ searchParams }: Props) {
-  const data = await studentApi.getStudentsSSR(searchParams)
+const data = await studentApi.getStudentsSSR(searchParams)
 
-  return <ServerStudentTable students={data.students} />
+return <ServerStudentTable students={data.students} />
 }
 \`\`\`
 
@@ -107,9 +107,9 @@ export default async function ServerPage({ searchParams }: Props) {
 \`\`\`typescript
 // Combines server-side initial data with client-side interactivity
 async function DashboardStats() {
-  const initialData = await studentApi.getStatsSSR() // Server-side
+const initialData = await studentApi.getStatsSSR() // Server-side
 
-  return <StatsDisplay initialData={initialData} /> // Client-side enhanced
+return <StatsDisplay initialData={initialData} /> // Client-side enhanced
 }
 \`\`\`
 
@@ -130,11 +130,11 @@ async function DashboardStats() {
 \`\`\`typescript
 // modules/students/components/virtual-student-table.tsx
 <Virtuoso
-  data={students}
-  itemContent={(index, student) => (
-    <StudentRow student={student} index={index} />
-  )}
-  components={{
+data={students}
+itemContent={(index, student) => (
+<StudentRow student={student} index={index} />
+)}
+components={{
     Header: () => <TableHeader />,
     Footer: () => <TableFooter />,
   }}
@@ -166,7 +166,7 @@ async function DashboardStats() {
 🔹 **Prisma** - Type-safe database access with excellent DX  
 🔹 **Radix UI** - Accessible primitives, WAI-ARIA compliant  
 🔹 **shadcn/ui** - Consistent component library, customizable  
-🔹 **Husky** - Git hooks for code quality enforcement  
+🔹 **Husky** - Git hooks for code quality enforcement
 
 ## 🚀 Getting Started
 
@@ -204,12 +204,22 @@ npm run dev
 
 ### Docker Deployment
 
+If you use docker then copy this to .env
+
+```
+NEXT_PUBLIC_API_URL="http://localhost:3000/api"
+#for docker database
+DATABASE_URL="postgresql://user:password@db:5432/mydb?connection_limit=1&sslmode=prefer"
+```
+
+Then run the following commands to build and start the application:     
+
+
 ```bash
 docker compose up --build
 
-or 
+or
 
 docker build -t crm
 docker run -p 3000:3000 student-crm
 ```
-

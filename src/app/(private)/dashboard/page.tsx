@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { STATUS_COLORS } from '@/modules/students';
 import prisma from '@/lib/db';
 
+export const dynamic = 'force-dynamic'; // Force dynamic rendering for real-time updates
+
 async function DashboardStats() {
   const statuses = [
     'Approved',

@@ -14,12 +14,14 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    image: docsf_frontend_production:latest
-    container_name: docsf_frontend_production
+    image: crm:latest
+    container_name: crm
     ports:
       - '0.0.0.0:3000:3000'
+    depends_on:
+      - db
     env_file:
-      - .env.production
+      - .env
     restart: always
 
 volumes:

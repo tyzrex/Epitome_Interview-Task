@@ -23,7 +23,6 @@ This project demonstrates **enterprise-level frontend architecture** and **multi
 
 The project follows a **domain-driven design** approach with self-contained modules:
 
-\`\`\`
 src/
 ├── modules/
 │   └── students/                    # Student Management Module
@@ -45,7 +44,6 @@ src/
 ├── providers/                      # React context providers
 ├── services/                       # Global services
 └── app/                           # Next.js App Router pages
-\`\`\`
 
 ### Benefits of This Architecture
 

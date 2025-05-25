@@ -41,7 +41,7 @@ This project demonstrates **three distinct data fetching approaches** to showcas
 
 **Route:** `/dashboard/students`
 
-\`\`\`typescript
+```typescript
 // modules/students/hooks/use-students.ts
 export function useStudents({ page, limit, filters }: UseStudentsParams) {
 return useQuery({
@@ -51,7 +51,7 @@ staleTime: 60 _ 1000,
 gcTime: 10 _ 60 \* 1000,
 })
 }
-\`\`\`
+```
 
 **Use Cases:**
 
@@ -64,14 +64,14 @@ gcTime: 10 _ 60 \* 1000,
 
 **Route:** `/dashboard/server`
 
-\`\`\`typescript
+```typescript
 // app/dashboard/server/page.tsx
 export default async function ServerPage({ searchParams }: Props) {
 const data = await studentApi.getStudentsSSR(searchParams)
 
 return <ServerStudentTable students={data.students} />
 }
-\`\`\`
+```
 
 **Use Cases:**
 
@@ -84,14 +84,14 @@ return <ServerStudentTable students={data.students} />
 
 **Route:** `/dashboard` (Overview)
 
-\`\`\`typescript
+```typescript
 // Combines server-side initial data with client-side interactivity
 async function DashboardStats() {
 const initialData = await studentApi.getStatsSSR() // Server-side
 
 return <StatsDisplay initialData={initialData} /> // Client-side enhanced
 }
-\`\`\`
+```
 
 **Use Cases:**
 
@@ -107,7 +107,7 @@ return <StatsDisplay initialData={initialData} /> // Client-side enhanced
 
 **Solution:** React Virtuoso implementation with dynamic heights
 
-\`\`\`typescript
+```typescript
 // modules/students/components/virtual-student-table.tsx
 <Virtuoso
 data={students}
@@ -119,7 +119,7 @@ components={{
     Footer: () => <TableFooter />,
   }}
 />
-\`\`\`
+```
 
 **Performance Results:**
 

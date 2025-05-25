@@ -9,7 +9,7 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "prepare": "husky",
-    "seed": "node prisma/seed.js"
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^9.8.0",
@@ -34,6 +34,7 @@
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^4",
+    "tsx": "^4.19.4",
     "typescript": "^5"
   }
 }

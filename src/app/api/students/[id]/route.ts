@@ -1,0 +1,31 @@
+// app/api/students/[id]/route.ts
+
+import { db } from '@/lib/db';
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: { id: string } },
+) {
+  const { id } = params;
+  const body = await request.json();
+  const { status } = body;
+  if (!id || !status) {
+    return new NextResponse('Invalid request', { status: 400 });
+  }
+
+  try {
+    const updatedStudent = await db.student.update({
+      where: { id },
+      data: {
+        status: status,
+        updatedAt: new Date(),
+      },
+    });
+
+    return NextResponse.json(updatedStudent);
+  } catch (error: unknown) {
+    console.error('Update failed:', error);
+    return new NextResponse('Failed to update student', { status: 500 });
+  }
+}

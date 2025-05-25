@@ -8,8 +8,6 @@ import {
   BarChart3,
   Users,
   GraduationCap,
-  FileText,
-  Settings,
   ChevronLeft,
   ChevronRight,
   Menu,
@@ -25,16 +23,13 @@ const navigation = [
   { name: 'Students', href: '/dashboard/students', icon: Users },
   { name: 'Virtual Table', href: '/dashboard/virtual', icon: Zap },
   { name: 'Server SSR', href: '/dashboard/server', icon: Server },
-  { name: 'Programs', href: '/programs', icon: GraduationCap },
-  { name: 'Applications', href: '/applications', icon: FileText },
-  { name: 'Settings', href: '/settings', icon: Settings },
 ];
 
 export default function DashboardSidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery('(max-width: 1250px)');
 
   // Close mobile sidebar when route changes
   useEffect(() => {
@@ -66,8 +61,8 @@ export default function DashboardSidebar() {
   }, [collapsed, mobileOpen, isMobile]);
 
   const SidebarContent = () => (
-    <div className='fixed left-0 flex h-screen flex-col justify-between'>
-      <div className='border-b border-gray-200 p-4'>
+    <div className='fixed left-0 flex h-screen w-full max-w-64 flex-col justify-between'>
+      <div className='p-4'>
         <div className='flex items-center gap-3'>
           <div className='flex h-8 w-8 items-center justify-center rounded-lg bg-teal-600'>
             <GraduationCap className='h-5 w-5 text-white' />
@@ -117,19 +112,6 @@ export default function DashboardSidebar() {
           })}
         </ul>
       </nav>
-
-      {/* Keyboard shortcut hint */}
-      {(!collapsed || isMobile) && (
-        <div className='border-t border-gray-200 p-4'>
-          <div className='text-center text-xs text-gray-500'>
-            Press{' '}
-            <kbd className='rounded bg-gray-100 px-1 py-0.5 text-xs'>
-              Ctrl+B
-            </kbd>{' '}
-            to toggle
-          </div>
-        </div>
-      )}
 
       {/* Collapse Toggle - Desktop only */}
       {!isMobile && (
@@ -203,7 +185,7 @@ export default function DashboardSidebar() {
                         <Link
                           href={item.href}
                           className={cn(
-                            'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                            'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                             isActive
                               ? 'border border-teal-200 bg-teal-50 text-teal-700'
                               : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
@@ -227,8 +209,8 @@ export default function DashboardSidebar() {
   return (
     <div
       className={cn(
-        'relative flex flex-col border-r border-gray-200 bg-white transition-all duration-300',
-        collapsed ? 'w-16' : 'w-64',
+        'relative flex h-screen flex-col border-r border-gray-200 bg-white transition-all duration-300',
+        collapsed ? 'w-16' : 'min-w-64',
       )}
     >
       <SidebarContent />

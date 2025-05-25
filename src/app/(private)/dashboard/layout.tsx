@@ -8,7 +8,7 @@ export default function PrivateLayout({
 }>) {
   return (
     <>
-      <div className='min-h-screen bg-gray-50'>
+      <div className='min-h-screen'>
         <div className='flex'>
           <DashboardSidebar />
           <div className='flex flex-1 flex-col'>

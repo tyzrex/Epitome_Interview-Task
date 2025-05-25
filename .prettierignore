@@ -13,3 +13,4 @@ node_modules
  test-results
  junit.xml
  docs
+ pnpm-lock.yaml

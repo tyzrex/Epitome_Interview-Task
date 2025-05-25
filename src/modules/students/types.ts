@@ -28,5 +28,4 @@ export type ViewMode = 'card' | 'table';
 export interface StudentUpdateData {
   id: string;
   status?: StudentStatus;
-  notes?: string;
 }

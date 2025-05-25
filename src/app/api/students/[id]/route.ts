@@ -1,6 +1,4 @@
-// app/api/students/[id]/route.ts
-
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function PATCH(

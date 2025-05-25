@@ -21,29 +21,9 @@ This project demonstrates **enterprise-level frontend architecture** and **multi
 
 ### Modular Feature Architecture
 
-The project follows a **domain-driven design** approach with self-contained modules:
+The project follows a **modular design** approach with self-contained modules:
 
-src/
-├── modules/
-│ └── students/ # Student Management Module
-│ ├── components/ # Feature-specific components
-│ │ ├── student-table.tsx
-│ │ ├── student-card.tsx
-│ │ └── student-filters.tsx
-│ ├── hooks/ # Custom hooks for student logic
-│ │ ├── use-students.ts # Data fetching hook
-│ │ └── use-update-students.ts # Mutation hook
-│ ├── services/ # API layer abstraction
-│ │ └── student-api.ts
-│ ├── constants.ts # Module constants
-│ ├── types.ts # TypeScript definitions
-│ └── index.ts # Public API exports
-├── components/ # Shared UI components
-├── hooks/ # Global custom hooks
-├── lib/ # Utilities and configurations
-├── providers/ # React context providers
-├── services/ # Global services
-└── app/ # Next.js App Router pages
+![Alt text](public/image.png)
 
 ### Benefits of This Architecture
 

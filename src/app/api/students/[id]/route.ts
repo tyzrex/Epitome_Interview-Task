@@ -8,6 +8,8 @@ export async function PATCH(
   const { id } = await params;
   const body = await request.json();
   const { status } = body;
+
+  console.log('Updating student:', { id, status });
   if (!id || !status) {
     return new NextResponse('Invalid request', { status: 400 });
   }

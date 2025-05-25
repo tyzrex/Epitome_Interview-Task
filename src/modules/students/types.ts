@@ -20,7 +20,6 @@ export interface StudentFilters {
   search: string;
   status: StudentStatus | 'All';
   program: string | 'All';
-  country: string | 'All';
 }
 
 export type ViewMode = 'card' | 'table';

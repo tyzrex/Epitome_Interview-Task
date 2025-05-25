@@ -45,8 +45,6 @@ async function ServerStudentContent({
     return <p className='text-red-500'>Failed to load students data</p>;
   }
 
-  console.log(filters);
-
   return (
     <>
       <ServerStudentFilters filters={filters} />

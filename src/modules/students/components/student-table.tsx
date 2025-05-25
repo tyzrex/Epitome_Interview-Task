@@ -23,7 +23,7 @@ import { StatusUpdateDialog } from '@/modules/students/components/status-update-
 
 interface ServerStudentTableProps {
   students: Student[];
-  revalidateData: () => Promise<void>;
+  revalidateData?: () => Promise<void>;
 }
 
 export function ServerStudentTable({
@@ -53,6 +53,7 @@ export function ServerStudentTable({
 
   const handleRefresh = () => {
     startTransition(async () => {
+      if (!revalidateData) return;
       await revalidateData();
     });
   };

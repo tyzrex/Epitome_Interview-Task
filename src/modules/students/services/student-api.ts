@@ -44,3 +44,34 @@ export const getStudents = async (params: {
     };
   }
 };
+
+export const updateStudentStatus = async (
+  studentId: string,
+  status?: string,
+): Promise<{ success: boolean; data?: Student; message?: string }> => {
+  try {
+    console.log('Status:', status);
+    const response = await fetchWrapper<Student>(`/api/students/${studentId}`, {
+      method: 'PATCH',
+      body: {
+        status: status,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      validateStatus: (httpStatus: number) =>
+        httpStatus >= 200 && httpStatus < 300,
+      tags: ['students', 'update'],
+    });
+
+    return {
+      success: true,
+      data: response.data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: 'Failed to update student status',
+    };
+  }
+};

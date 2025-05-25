@@ -28,3 +28,5 @@ export const STATUS_COLORS = {
 } as const;
 
 export const PAGINATION_LIMITS = [10, 20, 50, 100] as const;
+export const VIRTUALIZATION_THRESHOLD = 1000; // Show virtualization warning when data exceeds this
+export const RECOMMENDED_PAGE_SIZE = 50; // Recommended page size for large datasets

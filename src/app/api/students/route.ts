@@ -10,6 +10,15 @@ export async function GET(req: Request) {
   const name = searchParams.get('name') || undefined;
   const program = searchParams.get('program') || undefined;
 
+  if (process.env.NODE_ENV === 'production') {
+    if (limit > 100) {
+      return NextResponse.json(
+        { error: 'Limit cannot exceed 100 in production' },
+        { status: 400 },
+      );
+    }
+  }
+
   const where = {
     ...(status &&
       status !== 'All' && {

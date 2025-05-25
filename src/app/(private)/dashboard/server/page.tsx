@@ -9,6 +9,7 @@ import { ServerStudentTable } from '@/modules/students/components/student-table'
 import { ServerStudentPagination } from '@/modules/students/components/server-student-pagination';
 import TableSkeleton from '@/modules/students/components/table-skeleton';
 import { ServerStudentFilters } from '@/modules/students/components/server-side-student-filters';
+import ActiveFilters from '@/modules/students/components/active-filters';
 
 interface ServerStudentDashboardProps {
   searchParams?: Promise<{
@@ -49,48 +50,20 @@ async function ServerStudentContent({
     <>
       <ServerStudentFilters filters={filters} />
 
-      <div className='flex flex-wrap items-center gap-2'>
-        {filters.status !== 'All' && (
-          <Badge
-            variant='secondary'
-            className='border-teal-200 bg-teal-50 text-teal-700'
-          >
-            Status: {filters.status}
-          </Badge>
-        )}
-        {filters.program !== 'All' && (
-          <Badge
-            variant='secondary'
-            className='border-teal-200 bg-teal-50 text-teal-700'
-          >
-            Program: {filters.program}
-          </Badge>
-        )}
-        {filters.search && (
-          <Badge
-            variant='secondary'
-            className='border-teal-200 bg-teal-50 text-teal-700'
-          >
-            Search: &quot;{filters.search}&quot;
-          </Badge>
-        )}
-
-        {filters.status === 'All' &&
-          filters.program === 'All' &&
-          filters.search === '' && (
-            <Badge
-              variant='secondary'
-              className='border-gray-200 bg-gray-50 text-gray-700'
-            >
-              No filters applied
-            </Badge>
-          )}
-      </div>
+      <ActiveFilters
+        program={filters.program}
+        search={filters.search}
+        status={filters.status}
+      />
 
       <div className='flex flex-wrap items-center justify-between'>
         <p className='text-sm text-gray-600'>
-          Showing {response.data?.pagination?.limit} of{' '}
-          {response.data?.pagination?.total} students
+          Showing{' '}
+          {response.data?.pagination?.limit &&
+          response.data?.pagination?.limit > response.data?.pagination?.total
+            ? response.data?.pagination?.total
+            : response.data?.pagination?.limit}{' '}
+          of {response.data?.pagination?.total} students
         </p>
         <div className='hidden items-center gap-2 sm:flex'>
           <p className='text-xs text-gray-500'>

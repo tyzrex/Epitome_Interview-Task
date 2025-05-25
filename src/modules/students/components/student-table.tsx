@@ -51,13 +51,6 @@ export function ServerStudentTable({
     }
   };
 
-  const handleRefresh = () => {
-    startTransition(async () => {
-      if (!revalidateData) return;
-      await revalidateData();
-    });
-  };
-
   if (isMobile) {
     return (
       <div className='block md:hidden'>
@@ -69,7 +62,7 @@ export function ServerStudentTable({
                 student={student}
                 selectedIds={selectedIds}
                 handleSelectOne={handleSelectOne}
-                handleRefresh={handleRefresh}
+                setSelectedStudent={setSelectedStudent}
                 isPending={isPending}
               />
             ))}
@@ -80,6 +73,12 @@ export function ServerStudentTable({
             )}
           </div>
         </ScrollArea>
+
+        <StatusUpdateDialog
+          student={selectedStudent}
+          open={!!selectedStudent}
+          onOpenChange={(open) => !open && setSelectedStudent(null)}
+        />
       </div>
     );
   }

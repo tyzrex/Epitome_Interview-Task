@@ -22,25 +22,18 @@ const statuses = [
 
 async function main() {
   //check if the database is empty
-  const count = await db.student.count();
-  if (count > 0) {
-    console.log('Database already seeded. Skipping seed.');
-    return;
-  }
-  console.log('Seeding database...');
+  // const count = await db.student.count();
+  // if (count > 0) {
+  //   console.log('Database already seeded. Skipping seed.');
+  //   return;
+  // }
+  // console.log('Seeding database...');
 
-  const usedEmails = new Set<string>();
-  const students = Array.from({ length: 1000 }).map(() => {
-    let email: string;
-    do {
-      email = faker.internet.email();
-    } while (usedEmails.has(email));
-    usedEmails.add(email);
-
+  const students = Array.from({ length: 100000 }).map(() => {
     return {
       name: faker.person.fullName(),
       program: faker.helpers.arrayElement(programs),
-      email,
+      email: `${faker.internet.username().toLowerCase()}${Date.now()}${Math.floor(Math.random() * 1000)}@example.com`,
       status: faker.helpers.arrayElement(statuses),
       applicationDate: faker.date.between({
         from: '2023-01-01',

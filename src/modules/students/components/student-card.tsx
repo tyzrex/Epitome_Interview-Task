@@ -10,13 +10,13 @@ export default function StudentCard({
   student,
   selectedIds,
   handleSelectOne,
-  handleRefresh,
+  setSelectedStudent,
   isPending,
 }: {
   student: Student;
   selectedIds: string[];
   handleSelectOne: (id: string, checked: boolean) => void;
-  handleRefresh: () => void;
+  setSelectedStudent: (student: Student | null) => void;
   isPending: boolean;
 }) {
   return (
@@ -39,9 +39,6 @@ export default function StudentCard({
             <h3 className='break-after-all font-medium text-gray-900'>
               {student.name}
             </h3>
-            <p className='break-after-all text-sm text-gray-500 sm:block'>
-              {student.email}
-            </p>
           </div>
         </div>
         <Badge
@@ -53,7 +50,7 @@ export default function StudentCard({
       </div>
 
       <div className='space-y-2 text-sm'>
-        <div className='flex items-center gap-2 text-gray-600'>
+        <div className='flex items-center gap-2 break-all text-gray-600'>
           <Mail className='h-4 w-4 flex-shrink-0' />
           <span>{student.email}</span>
         </div>
@@ -83,7 +80,7 @@ export default function StudentCard({
         <Button
           variant='outline'
           size='sm'
-          onClick={handleRefresh}
+          onClick={() => setSelectedStudent(student)}
           disabled={isPending}
           className='flex-1 py-2'
         >

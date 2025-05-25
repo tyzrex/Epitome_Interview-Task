@@ -1,7 +1,6 @@
 'use client';
-
 import { useState } from 'react';
-import type { StudentFilters, ViewMode } from '@/modules/students';
+import type { StudentFilters } from '@/modules/students';
 import { useDebounce } from '@/hooks/use-debounce';
 import {
   VIRTUALIZATION_THRESHOLD,
@@ -12,14 +11,12 @@ import { StudentPagination } from '@/modules/students/components/student-paginat
 import { VirtualizationWarning } from '@/modules/students/components/virtualization-warning';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertCircle, Download, Share } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { AlertCircle } from 'lucide-react';
 import { ServerStudentTable } from '@/modules/students/components/student-table';
 import { useStudents } from '@/modules/students/hooks';
+import ActiveFilters from '@/modules/students/components/active-filters';
 
 export default function StudentDashboard() {
-  const [viewMode, setViewMode] = useState<ViewMode>('table');
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const [filters, setFilters] = useState<StudentFilters>({
@@ -76,45 +73,18 @@ export default function StudentDashboard() {
             Manage student applications and track their progress
           </p>
         </div>
-        <div className='flex items-center gap-3'>
-          <Button variant='outline' className='flex items-center gap-2'>
-            <Share className='h-4 w-4' />
-            Share
-          </Button>
-          <Button className='flex items-center gap-2 bg-teal-600 hover:bg-teal-700'>
-            <Download className='h-4 w-4' />
-            Export
-          </Button>
-        </div>
       </div>
 
-      {/* Active Filters */}
-      <div className='flex flex-wrap items-center gap-2'>
-        {filters.status !== 'All' && (
-          <Badge
-            variant='secondary'
-            className='border-teal-200 bg-teal-50 text-teal-700'
-          >
-            Status: {filters.status}
-          </Badge>
-        )}
-        {filters.program !== 'All' && (
-          <Badge
-            variant='secondary'
-            className='border-teal-200 bg-teal-50 text-teal-700'
-          >
-            Program: {filters.program}
-          </Badge>
-        )}
-        {filters.search && (
-          <Badge
-            variant='secondary'
-            className='border-teal-200 bg-teal-50 text-teal-700'
-          >
-            Search: &quot;{filters.search}&quot;
-          </Badge>
-        )}
-      </div>
+      <StudentFiltersComponent
+        filters={filters}
+        onFiltersChange={handleFiltersChange}
+      />
+
+      <ActiveFilters
+        program={filters.program}
+        search={filters.search}
+        status={filters.status}
+      />
 
       {/* Virtualization Warning */}
       {shouldShowVirtualizationWarning && (
@@ -141,7 +111,7 @@ export default function StudentDashboard() {
               Showing {data.pagination.limit} of {data.pagination.total}{' '}
               students
             </p>
-            <p className='text-xs text-gray-500'>
+            <p className='hidden text-xs text-gray-500 sm:block'>
               Client-side fetching with React Query
             </p>
           </div>

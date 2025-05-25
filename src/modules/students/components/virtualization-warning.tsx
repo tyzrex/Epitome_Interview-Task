@@ -30,15 +30,6 @@ export function VirtualizationWarning({
             <li>Consider server-side pagination with search</li>
           </ul>
         </div>
-        <Button
-          variant='outline'
-          size='sm'
-          onClick={onOptimize}
-          className='ml-4 border-amber-300 text-amber-700 hover:bg-amber-100'
-        >
-          <Zap className='mr-2 h-4 w-4' />
-          Optimize
-        </Button>
       </AlertDescription>
     </Alert>
   );

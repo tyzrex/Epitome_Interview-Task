@@ -66,7 +66,7 @@ export default function DashboardSidebar() {
   }, [collapsed, mobileOpen, isMobile]);
 
   const SidebarContent = () => (
-    <div className='flex h-screen flex-col justify-between'>
+    <div className='fixed left-0 flex h-screen flex-col justify-between'>
       <div className='border-b border-gray-200 p-4'>
         <div className='flex items-center gap-3'>
           <div className='flex h-8 w-8 items-center justify-center rounded-lg bg-teal-600'>

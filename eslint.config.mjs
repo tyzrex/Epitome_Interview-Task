@@ -47,6 +47,17 @@ const eslintConfig = [
           'src/**/!^[.*': 'KEBAB_CASE',
         },
       ],
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          varsIgnorePattern: '^_',
+          argsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
+      '@typescript-eslint/no-explicit-any': 'warn',
     },
   },
 ];

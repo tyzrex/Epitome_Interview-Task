@@ -23,18 +23,6 @@ export interface StudentFilters {
   country: string | 'All';
 }
 
-export interface PaginationInfo {
-  page: number;
-  limit: number;
-  total: number;
-  totalPages: number;
-}
-
-export interface StudentsResponse {
-  students: Student[];
-  pagination: PaginationInfo;
-}
-
 export type ViewMode = 'card' | 'table';
 
 export interface StudentUpdateData {

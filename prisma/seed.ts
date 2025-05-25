@@ -29,15 +29,25 @@ async function main() {
   }
   console.log('Seeding database...');
 
-  const students = Array.from({ length: 10000 }).map(() => ({
-    name: faker.person.fullName(),
-    program: faker.helpers.arrayElement(programs),
-    status: faker.helpers.arrayElement(statuses),
-    applicationDate: faker.date.between({
-      from: '2023-01-01',
-      to: '2024-12-31',
-    }),
-  }));
+  const usedEmails = new Set<string>();
+  const students = Array.from({ length: 1000 }).map(() => {
+    let email: string;
+    do {
+      email = faker.internet.email();
+    } while (usedEmails.has(email));
+    usedEmails.add(email);
+
+    return {
+      name: faker.person.fullName(),
+      program: faker.helpers.arrayElement(programs),
+      email,
+      status: faker.helpers.arrayElement(statuses),
+      applicationDate: faker.date.between({
+        from: '2023-01-01',
+        to: '2024-12-31',
+      }),
+    };
+  });
 
   await db.student.createMany({
     data: students,

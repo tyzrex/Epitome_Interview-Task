@@ -16,6 +16,7 @@ datasource db {
 
 model Student {
   id              String   @id @default(cuid())
+  email           String   @unique
   name            String
   program         String
   status          String

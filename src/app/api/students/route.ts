@@ -11,13 +11,15 @@ export async function GET(req: Request) {
   const program = searchParams.get('program') || undefined;
 
   const where = {
-    ...(status && {
-      status: { contains: status, mode: 'insensitive' as const },
-    }),
+    ...(status &&
+      status !== 'All' && {
+        status: { contains: status, mode: 'insensitive' as const },
+      }),
     ...(name && { name: { contains: name, mode: 'insensitive' as const } }),
-    ...(program && {
-      program: { contains: program, mode: 'insensitive' as const },
-    }),
+    ...(program &&
+      program !== 'All' && {
+        program: { contains: program, mode: 'insensitive' as const },
+      }),
   };
 
   const [students, total] = await Promise.all([
@@ -32,8 +34,11 @@ export async function GET(req: Request) {
 
   return NextResponse.json({
     data: students,
-    total,
-    page,
-    totalPages: Math.ceil(total / limit),
+    pagination: {
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
+      limit,
+    },
   });
 }
